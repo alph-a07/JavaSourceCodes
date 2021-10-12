@@ -1,3 +1,5 @@
+package Stacks;
+
 public class Stack {
     public static final int DEFAULT_CAPACITY = 5;
 
