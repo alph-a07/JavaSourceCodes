@@ -1,4 +1,4 @@
-package backtracking.sorting_algorithms;
+package sorting_algorithms;
 
 public class quick_sort {
     public static void main(String[] args) {

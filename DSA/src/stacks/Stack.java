@@ -44,8 +44,8 @@ public class Stack {
     }
 
     // To see upmost element
-    public void peek() {
-        System.out.println("Element : " + array[top - 1]);
+    public int peek() {
+        return array[top - 1];
     }
 
     // Prints stack
