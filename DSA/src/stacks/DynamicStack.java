@@ -20,7 +20,7 @@ public class DynamicStack extends Stack {
             array = array2;
         }
         // Push will work same as before with the new array
-        // Ofc until its full again
+        // Of Course until its full again
         super.push(element);
     }
 }

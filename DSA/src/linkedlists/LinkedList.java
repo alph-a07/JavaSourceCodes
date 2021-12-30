@@ -11,6 +11,11 @@ public class LinkedList {
     // Summary Objects of Linked List class
     private Node head;
     private Node tail;
+
+    public int getSize() {
+        return size;
+    }
+
     private int size;
 
     // O(N)

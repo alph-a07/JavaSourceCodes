@@ -18,6 +18,7 @@ public class Stack {
     }
 
     // To insert an element
+    // O(1)
     public void push(int element) {
         // overflow handling
         if (size() == array.length) {
@@ -29,6 +30,7 @@ public class Stack {
     }
 
     // Removes and returns the upmost element
+    // O(1)
     public int pop() {
         int temp = 0;
         // underflow handling
@@ -44,11 +46,13 @@ public class Stack {
     }
 
     // To see upmost element
+    // O(1)
     public int peek() {
         return array[top - 1];
     }
 
     // Prints stack
+    // O(N)
     public void show() {
         if (size() == 0) {
             System.out.println("Stack Empty!");
@@ -60,11 +64,13 @@ public class Stack {
     }
 
     // Returns size
+    // O(1)
     public int size() {
         return top;
     }
 
     // Checks wether stack is empty or not
+    // O(1)
     public boolean isEmpty() {
         if (top <= 0) {
             return true;
