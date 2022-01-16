@@ -4,6 +4,11 @@ public class Stack {
     public static final int DEFAULT_CAPACITY = 5;
 
     int[] array;
+
+    public int getTop() {
+        return top;
+    }
+
     int top;
 
     public Stack() {

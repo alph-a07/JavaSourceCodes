@@ -1,31 +1,41 @@
 package queues;
 
-import java.util.LinkedList;
+import linkedlists.LinkedList;
 
 public class QueueUsingLinkedList {
-    private LinkedList<Integer> queue;
+    private LinkedList queue;
 
     public QueueUsingLinkedList() {
-        queue = new LinkedList<>();
+        queue = new LinkedList();
+    }
+
+    // O(1)
+    public int size(){
+        return this.queue.getSize();
     }
 
     // O(1)
     public boolean isEmpty() {
-        return queue.isEmpty();
+        return this.size() == 0;
     }
 
     // O(1)
     public void enqueue(int data) {
-        queue.addFirst(data);
+        queue.addAtLast(data);
     }
 
     // O(1)
-    public void dequeue() {
-        queue.removeFirst();
+    public int dequeue() throws Exception {
+        return queue.removeFirst();
     }
 
     // O(1)
-    public int getFront() {
+    public int getFront() throws Exception {
         return queue.getFirst();
+    }
+
+    // O(N)
+    public void display(){
+        this.queue.display();
     }
 }

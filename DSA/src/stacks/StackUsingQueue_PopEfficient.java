@@ -2,26 +2,25 @@ package stacks;
 
 import queues.QueueUsingLinkedList;
 
-public class stackUsingQueue_PushEfficient {
+public class StackUsingQueue_PopEfficient {
     private QueueUsingLinkedList q1 = new QueueUsingLinkedList();
     private QueueUsingLinkedList q2 = new QueueUsingLinkedList();
 
-    // O(1)
-    public void push(int data) {
-        this.q1.enqueue(data);
-    }
-
     // O(N)
-    public int pop() throws Exception {
-        while (!(this.q1.size() == 1)) {
+    public void push(int data) throws Exception {
+        q2.enqueue(data);
+        while (!q1.isEmpty()) {
             q2.enqueue(q1.dequeue());
         }
-        int temp = q1.dequeue();
         QueueUsingLinkedList q;
         q = q1;
         q1 = q2;
         q2 = q;
-        return temp;
+    }
+
+    // O(1)
+    public int pop() throws Exception {
+        return q1.dequeue();
     }
 
     public int size() {
@@ -37,7 +36,7 @@ public class stackUsingQueue_PushEfficient {
     }
 }
 
-class test4 {
+class test3 {
     public static void main(String[] args) throws Exception {
         StackUsingQueue_PopEfficient s = new StackUsingQueue_PopEfficient();
         s.push(1);
@@ -48,11 +47,7 @@ class test4 {
         s.push(6);
         s.push(7);
 
-        System.out.println(s.pop());
-        System.out.println();
         s.show();
 
     }
 }
-
-

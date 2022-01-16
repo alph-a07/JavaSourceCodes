@@ -1,19 +1,19 @@
 package queues;
 
-public class Queue {
+public class CircularQueue {
     int[] array;
     int front;
     int rear;
     int currentSize;
     int maxSize;
 
-    public static int DEFAULT_CAPACITY = 10;
+    public static int DEFAULT_CAPACITY = 5;
 
-    Queue() {
+    CircularQueue() {
         this(DEFAULT_CAPACITY);
     }
 
-    Queue(int capacity) {
+    CircularQueue(int capacity) {
         this.array = new int[capacity];
         this.front = 0;
         this.currentSize = 0;
@@ -47,15 +47,19 @@ public class Queue {
     }
 
     // O(1)
-    public void dequeue() {
+    public int dequeue() {
+        int temp=this.array[this.front];
         if (!this.isEmpty()) {
             this.front = (this.front + 1) % this.array.length;
             this.currentSize--;
         }
+        return temp;
     }
 
     // O(1)
-    public int getFront() {
+    public int getFront() throws Exception {
+        if (this.isEmpty())
+            throw new Exception("Empty Queue");
         return this.array[this.front];
     }
 
@@ -75,8 +79,8 @@ public class Queue {
 }
 
 class test {
-    public static void main(String[] args) {
-        Queue q = new Queue(5);
+    public static void main(String[] args) throws Exception {
+        CircularQueue q = new CircularQueue(5);
 
         for (int i = 0; i < 5; i++) {
             q.enqueue(i + 1);
