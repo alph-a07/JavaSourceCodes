@@ -2,6 +2,7 @@ package queues;
 
 import linkedlists.LinkedList;
 
+// DYNAMIC QUEUE
 public class QueueUsingLinkedList {
     private LinkedList queue;
 

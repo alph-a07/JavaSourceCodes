@@ -1,4 +1,6 @@
-package stacks;
+package problems;
+
+import stacks.DynamicStack;
 
 public class NextGreaterElement {
     public static void main(String[] args) {

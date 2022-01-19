@@ -1,5 +1,6 @@
 package problems;
 
+// Arrange an array of 0s,1s and 2s such that T.C = O(n) and S.C = O(1)
 public class dutch_national_flag {
     public static void main(String[] args) {
         int[] array = new int[]{1, 2, 0, 1, 0, 2, 1, 1, 0, 2, 0, 1, 2};

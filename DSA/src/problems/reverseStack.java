@@ -1,4 +1,6 @@
-package stacks;
+package problems;
+
+import stacks.Stack;
 
 public class reverseStack extends Stack {
     public static void main(String[] args) {

@@ -2,6 +2,7 @@ package linkedlists;
 
 public class LinkedList {
 
+    // Defining Node of a Linked List
     // No outside access(INNER and PRIVATE)
     private class Node {
         int data;

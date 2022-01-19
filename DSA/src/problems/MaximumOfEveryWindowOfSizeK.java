@@ -1,4 +1,4 @@
-package queues;
+package problems;
 
 // Given an array and an integer K, find the maximum for each and every contiguous sub array of size k.
 
