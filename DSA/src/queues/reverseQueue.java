@@ -1,4 +1,4 @@
-package problems;
+package queues;
 
 import queues.QueueUsingLinkedList;
 

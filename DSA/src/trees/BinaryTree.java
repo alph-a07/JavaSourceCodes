@@ -1,8 +1,6 @@
 package trees;
 
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 // Any Node can have at max 2 children
 public class BinaryTree {
@@ -153,6 +151,42 @@ public class BinaryTree {
         inOrder(node.right);
     }
 
+    public void iterativeInorder() {
+        System.out.println(iterativeInorder(this.root));
+    }
+
+    // left root right
+    private ArrayList<Integer> iterativeInorder(Node node) {
+        // empty tree
+        if (node == null)
+            return new ArrayList<>();
+
+        Stack<Node> stack = new Stack<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        while (true) {
+            // if current node is not null then push it to stack
+            // go to its left node
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            // if the current node is null i.e. reached end
+            else {
+                // if reached end stack is also empty then all elements are printed
+                // break the loop
+                if (stack.isEmpty())
+                    break;
+
+                // go to stack and print the element as it will be last left element
+                node = stack.pop();
+                list.add(node.data);
+                // go to right node
+                node = node.right;
+            }
+        }
+        return list;
+    }
+
     // level wise
     public void levelOrder() {
         LinkedList<Node> l = new LinkedList<>();
@@ -167,6 +201,107 @@ public class BinaryTree {
                 l.add(temp.left);
             if (temp.right != null)
                 l.add(temp.right);
+        }
+    }
+
+    public boolean isBST() {
+        // root can have any value
+        // while left node should be less than current node and right node should be greater than current node
+        return isBST(this.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    // Approach - check if any node fails to follow property of a BST
+    private boolean isBST(Node node, int minValue, int maxValue) {
+        // reached and without failing
+        if (node == null)
+            return true;
+
+        // if current node does not follow property of BST
+        if (node.data < minValue || node.data > maxValue)
+            return false;
+
+            // if left subtree does not follow property of BST
+        else if (!isBST(node.left, minValue, node.data))
+            return false;
+
+            // if right subtree does not follow property of BST
+        else if (!isBST(node.right, node.data, maxValue))
+            return false;
+
+        // no failing detected
+        return true;
+    }
+
+    public int sumOfLeaves() {
+        return sumOfLeaves(this.root);
+    }
+
+    private int sumOfLeaves(Node node) {
+        int sum = 0;
+        if (node.right == null && node.left == null)
+            sum += node.data;
+
+        if (node.left != null)
+            sum += sumOfLeaves(node.left);
+
+        if (node.right != null)
+            sum += sumOfLeaves(node.right);
+
+        return sum;
+    }
+
+    public int diameter() {
+        return diameter(this.root);
+    }
+
+    // Height function is used multiple times for performing same operations
+    // TIME COMPLEXITY = O(N^2)
+    private int diameter(Node node) {
+        // base case
+        if (node == null)
+            return 0;
+        // when diameter passes through the root from left subtree to right subtree
+        int case1 = this.height(node.left) + this.height(node.right) + 2;
+        // when diameter lies within the left subtree
+        int case2 = this.diameter(node.left);
+        // when diameter lies within the right subtree
+        int case3 = this.diameter(node.right);
+
+        return Math.max(case1, Math.max(case2, case3));
+    }
+
+    public int optimizedDiameter() {
+        return this.optimizedDiameter(this.root).diameter;
+    }
+
+    // Same concept different approach
+    // TIME COMPLEXITY = O(N)
+    private Pair optimizedDiameter(Node node) {
+        if (node == null) {
+            return new Pair(-1, 0);
+        }
+
+        Pair left = optimizedDiameter(node.left);
+        Pair right = optimizedDiameter(node.right);
+
+        Pair temp = new Pair();
+
+        temp.height = Math.max(left.height, right.height) + 1;
+        temp.diameter = Math.max((left.height + right.height + 2), Math.max(left.diameter, right.diameter));
+
+        return temp;
+    }
+
+    private static class Pair {
+        int height;
+        int diameter;
+
+        Pair() {
+        }
+
+        Pair(int height, int diameter) {
+            this.height = height;
+            this.diameter = diameter;
         }
     }
 }
@@ -194,6 +329,19 @@ class test1 {
 
         System.out.println("Level Order");
         tree.levelOrder();
+        System.out.println();
+
+        System.out.println("In-Order");
+        tree.iterativeInorder();
+        System.out.println();
+
+        System.out.println("Sum of leaves");
+        System.out.println(tree.sumOfLeaves());
+        System.out.println();
+
+        System.out.println("Diameter");
+        System.out.println(tree.diameter());
+        System.out.println(tree.optimizedDiameter());
         System.out.println();
     }
 }

@@ -184,5 +184,8 @@ class test2 {
 
         tree.remove(40);
         tree.display();
+        System.out.println();
+
+
     }
 }
