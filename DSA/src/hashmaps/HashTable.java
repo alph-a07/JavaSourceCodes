@@ -1,7 +1,6 @@
 package hashmaps;
 
-import generics.GenericLinkedList;
-
+import linkedlists.GenericLinkedList;
 import java.util.Objects;
 
 public class HashTable<K, V> {

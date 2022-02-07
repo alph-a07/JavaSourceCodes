@@ -1,4 +1,4 @@
-package generics;
+package linkedlists;
 
 import linkedlists.LinkedList;
 
