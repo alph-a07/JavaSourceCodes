@@ -1,9 +1,11 @@
 package heaps;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GenericHeap<T extends Comparable<T>> {
-    private ArrayList<T> list = new ArrayList<>();
+    ArrayList<T> list = new ArrayList<>();
+    HashMap<T, Integer> trackIndex = new HashMap<>();
 
     // Added wrt priority and CBT property
     // O(log(N))
@@ -11,6 +13,8 @@ public class GenericHeap<T extends Comparable<T>> {
 
         // add element
         list.add(data);
+        // data will be added to the last of arraylist
+        trackIndex.put(data, this.list.size() - 1);
 
         // check if it violates priority property
         upHeapify(list.size() - 1);
@@ -26,6 +30,7 @@ public class GenericHeap<T extends Comparable<T>> {
         swap(0, list.size() - 1);
         T temp = list.remove(list.size() - 1);
         downHeapify(0);
+        trackIndex.remove(temp);
 
         return temp;
     }
@@ -52,10 +57,10 @@ public class GenericHeap<T extends Comparable<T>> {
 
         int minIndex = parentIndex;
 
-        if (leftChildIndex < list.size() && isLarger(list.get(minIndex), list.get(leftChildIndex)) > 0)
+        if (leftChildIndex < list.size() && isLarger(list.get(leftChildIndex), list.get(minIndex)) > 0)
             minIndex = leftChildIndex;
 
-        if (rightChildIndex < list.size() && isLarger(list.get(minIndex), list.get(rightChildIndex)) > 0)
+        if (rightChildIndex < list.size() && isLarger(list.get(rightChildIndex), list.get(minIndex)) > 0)
             minIndex = rightChildIndex;
 
         // minIndex has the value of min(parent,leftChild,rightChild)
@@ -82,8 +87,8 @@ public class GenericHeap<T extends Comparable<T>> {
 
         int parentIndex = (childIndex - 1) / 2;
 
-        if (isLarger(list.get(parentIndex), list.get(childIndex)) > 0) {
-            swap(childIndex, parentIndex);
+        if (isLarger(list.get(childIndex), list.get(parentIndex)) > 0) {
+            swap(parentIndex, childIndex);
             upHeapify(parentIndex);
         }
     }
@@ -94,6 +99,9 @@ public class GenericHeap<T extends Comparable<T>> {
 
         list.set(i, jth);
         list.set(j, ith);
+
+        trackIndex.put(ith,j);
+        trackIndex.put(jth,i);
     }
 
     public void display() {
@@ -112,6 +120,11 @@ public class GenericHeap<T extends Comparable<T>> {
     // returns negative if t has lower priority
     private int isLarger(T t, T o) {
         return t.compareTo(o);
+    }
+
+    public void updatePriority(T pair){
+        int index = trackIndex.get(pair);
+        this.upHeapify(index);
     }
 }
 

@@ -1,5 +1,7 @@
 package graphs;
 
+import heaps.GenericHeap;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -661,6 +663,73 @@ public class Graph {
         }
         return list;
     }
+
+    private class PrimsPair implements Comparable<PrimsPair> {
+        String vertex;
+        String acqVertex;
+        int cost;
+
+        @Override
+        // Make lower cost priority
+        public int compareTo(PrimsPair o) {
+            return o.cost - this.cost;
+        }
+    }
+
+    public Graph primsAlgo() {
+        Graph MST = new Graph();
+
+        HashMap<String, PrimsPair> map = new HashMap<>();
+        GenericHeap<PrimsPair> heap = new GenericHeap<>();
+
+        // Add pairs to heap and map both
+        for (String key : this.vertices.keySet()) {
+            PrimsPair pair = new PrimsPair();
+            pair.vertex = key;
+            pair.acqVertex = null;
+            pair.cost = Integer.MAX_VALUE;
+
+            heap.add(pair);
+            map.put(key, pair);
+        }
+
+        while (!heap.isEmpty()) {
+            // remove a pair
+            PrimsPair removedPair = heap.remove();
+            map.remove(removedPair.vertex);
+
+            // Initial case
+            if (removedPair.acqVertex == null) {
+                MST.addVertex(removedPair.vertex);
+            }
+            // If removed pair vertex was approached from some other vertex
+            else {
+                MST.addVertex(removedPair.vertex);
+                MST.addEdge(removedPair.vertex, removedPair.acqVertex, removedPair.cost);
+            }
+
+            // Work on neighbors
+            for (String neighbor : this.vertices.get(removedPair.vertex).neighbors.keySet()) {
+                // only if already not added to MST
+                if (map.containsKey(neighbor)) {
+                    int oldCost = map.get(neighbor).cost;
+                    int newCost = this.vertices.get(removedPair.vertex).neighbors.get(neighbor);
+
+                    // update cost if lower cost is found
+                    if (newCost < oldCost) {
+                        PrimsPair neighborPair = map.get(neighbor);
+                        neighborPair.acqVertex = removedPair.vertex;
+                        neighborPair.cost = newCost;
+                        // We need to upHeapify the heap after updating index
+                        // which will require index of the neighborPair in heap
+                        // we will track index through the heap class itself
+                        heap.updatePriority(neighborPair);
+                    }
+                }
+            }
+        }
+        return MST;
+    }
 }
 
 class test {
@@ -739,11 +808,11 @@ class test {
         graph.dft();
 
         System.out.println();
-        graph.removeEdge("B", "D");
+        //graph.removeEdge("B", "D");
         System.out.println("Is cycle present? " + graph.isCyclic());
 
         System.out.println();
-        graph.removeEdge("A", "B");
+        //graph.removeEdge("A", "B");
         System.out.println("Is graph continuous? " + graph.isContinuous());
 
         System.out.println();
@@ -751,5 +820,10 @@ class test {
 
         System.out.println();
         System.out.println("Connected Components : " + graph.getConnectedComponents());
+
+        System.out.println();
+        System.out.println("MST using Prim's algorithm:");
+        graph.primsAlgo().display();
+        System.out.println(graph.primsAlgo().isTree());
     }
 }
