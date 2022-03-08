@@ -13,7 +13,7 @@ public class Graph {
     // Value = Address of Vertex class containing neighbors of current vertex
     HashMap<String, Vertex> vertices;
 
-    private class Vertex {
+    private static class Vertex {
         // Hashmap of neighbors
         // Key = neighbor vertex name
         // Value = Cost of edge between current vertex and respective neighbor
@@ -168,7 +168,7 @@ public class Graph {
         return false;
     }
 
-    private class Pair {
+    private static class Pair {
         String vertexName;
         String pathSoFar;
     }
@@ -664,7 +664,7 @@ public class Graph {
         return list;
     }
 
-    private class PrimsPair implements Comparable<PrimsPair> {
+    private static class PrimsPair implements Comparable<PrimsPair> {
         String vertex;
         String acqVertex;
         int cost;
@@ -729,6 +729,72 @@ public class Graph {
             }
         }
         return MST;
+    }
+
+    private static class DijkstraPair implements Comparable<DijkstraPair> {
+
+        String vertex;
+        String pathSoFar;
+        int cost;
+
+        @Override
+        public int compareTo(DijkstraPair o) {
+            return o.cost - this.cost;
+        }
+    }
+
+    // O(V + E logV)
+    public HashMap<String, Integer> dijkstraAlgo(String source) {
+
+        HashMap<String, Integer> ans = new HashMap<>();
+        HashMap<String, DijkstraPair> map = new HashMap<>();
+        GenericHeap<DijkstraPair> heap = new GenericHeap<>();
+
+        // Add pairs to heap and map both
+        for (String key : this.vertices.keySet()) {
+            DijkstraPair pair = new DijkstraPair();
+            pair.vertex = key;
+            pair.pathSoFar = "";
+            pair.cost = Integer.MAX_VALUE;
+
+            if (key.equals(source)) {
+                pair.pathSoFar = key;
+                pair.cost = 0;
+            }
+
+            heap.add(pair);
+            map.put(key, pair);
+        }
+
+        while (!heap.isEmpty()) {
+            // remove a pair
+            DijkstraPair removedPair = heap.remove();
+            map.remove(removedPair.vertex);
+
+            // Add to answer
+            ans.put(removedPair.vertex, removedPair.cost);
+
+            // Work on neighbors
+            for (String neighbor : this.vertices.get(removedPair.vertex).neighbors.keySet()) {
+                // only if already not added to MST
+                if (map.containsKey(neighbor)) {
+                    int oldCost = map.get(neighbor).cost;
+                    int newCost = removedPair.cost + this.vertices.get(removedPair.vertex).neighbors.get(neighbor);
+
+                    // update cost if lower cost is found
+                    if (newCost < oldCost) {
+                        DijkstraPair neighborPair = map.get(neighbor);
+                        neighborPair.pathSoFar = removedPair.pathSoFar + neighbor;
+                        neighborPair.cost = newCost;
+                        // We need to upHeapify the heap after updating index
+                        // which will require index of the neighborPair in heap
+                        // we will track index through the heap class itself
+                        heap.updatePriority(neighborPair);
+                    }
+                }
+            }
+        }
+        return ans;
     }
 }
 
@@ -825,5 +891,9 @@ class test {
         System.out.println("MST using Prim's algorithm:");
         graph.primsAlgo().display();
         System.out.println(graph.primsAlgo().isTree());
+
+        System.out.println();
+        System.out.println("Minimum distance of vertices from source using Dijkstra's Algorithm:");
+        System.out.println(graph.dijkstraAlgo("A"));
     }
 }
