@@ -2,9 +2,7 @@ package graphs;
 
 import heaps.GenericHeap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Graph {
 
@@ -46,8 +44,7 @@ public class Graph {
         Vertex vertex = this.vertices.get(vertexName);
 
         // If vertex does not exist
-        if (vertex == null)
-            return;
+        if (vertex == null) return;
 
         // -- vertex exists --
         // List of all neighbors names of given vertex
@@ -98,8 +95,7 @@ public class Graph {
         Vertex vtx2 = this.vertices.get(vertex2);
 
         // If vertices don't exist, or they are ALREADY NEIGHBORS(i.e. edge already exists)
-        if (vtx1 == null || vtx2 == null || vtx1.neighbors.containsKey(vertex2))
-            return;
+        if (vtx1 == null || vtx2 == null || vtx1.neighbors.containsKey(vertex2)) return;
 
         // -- Both vertices exist and are not already neighbors --
         // Make neighbors of each other
@@ -113,8 +109,7 @@ public class Graph {
         Vertex vtx2 = this.vertices.get(vertex2);
 
         // If vertices don't exist or they are not neighbors
-        if (vtx1 == null || vtx2 == null || !vtx1.neighbors.containsKey(vertex2))
-            return;
+        if (vtx1 == null || vtx2 == null || !vtx1.neighbors.containsKey(vertex2)) return;
 
         // -- Both vertices exist and are already neighbors --
         // Make neighbors of each other
@@ -152,8 +147,7 @@ public class Graph {
         processed.put(vertex1, true);
 
         // BASE CASE
-        if (this.containsEdge(vertex1, vertex2))
-            return true;
+        if (this.containsEdge(vertex1, vertex2)) return true;
 
         Vertex vertex = this.vertices.get(vertex1);
 
@@ -162,8 +156,7 @@ public class Graph {
 
         for (String neighbor : neighborsNames) {
             // RECURSIVE CALL only if not checked before
-            if (!processed.containsKey(neighbor) && this.hasPath(neighbor, vertex2, processed))
-                return true;
+            if (!processed.containsKey(neighbor) && this.hasPath(neighbor, vertex2, processed)) return true;
         }
         return false;
     }
@@ -313,6 +306,7 @@ public class Graph {
     // 2. print their path
     // 3. add neighbors of removed vertex to queue
     // Repeat for all vertices(unprocessed)
+    // O(Vertices + edges)
     public void bft() {
         // Level-order implementation
         LinkedList<Pair> queue = new LinkedList<>();
@@ -327,8 +321,7 @@ public class Graph {
 
             // If there is discontinuity in graph
             // Few vertices will be unprocessed and their paths will be printed separately
-            if (processed.containsKey(vertex))
-                continue;
+            if (processed.containsKey(vertex)) continue;
 
             // Create a source pair
             Pair sourcePair = new Pair();
@@ -382,6 +375,7 @@ public class Graph {
 
     // As it is based on STACK implementation
     // Neighbors will be popped out first
+    // O(Vertices + edges)
     public void dft() {
         // Level-order implementation
         LinkedList<Pair> stack = new LinkedList<>();
@@ -396,8 +390,7 @@ public class Graph {
 
             // If there is discontinuity in graph
             // Few vertices will be unprocessed and their paths will be printed separately
-            if (processed.containsKey(vertex))
-                continue;
+            if (processed.containsKey(vertex)) continue;
 
             // Create a source pair
             Pair sourcePair = new Pair();
@@ -451,6 +444,7 @@ public class Graph {
 
     // Traverse through the graph (copied bft code)
     // return true if two paths for a single vertex are found
+    // O(Vertices + edges)
     public boolean isCyclic() {
         // Level-order implementation
         LinkedList<Pair> queue = new LinkedList<>();
@@ -464,8 +458,7 @@ public class Graph {
         for (String vertex : vertices) {
 
             // If there is discontinuity in graph
-            if (processed.containsKey(vertex))
-                continue;
+            if (processed.containsKey(vertex)) continue;
 
             // Create a source pair
             Pair sourcePair = new Pair();
@@ -514,6 +507,7 @@ public class Graph {
         return false;
     }
 
+    // O(Vertices + edges)
     public boolean isContinuous() {
         // Level-order implementation
         LinkedList<Pair> queue = new LinkedList<>();
@@ -528,8 +522,7 @@ public class Graph {
         for (String vertex : vertices) {
 
             // If there is discontinuity in graph CONTINUE WILL NOT BE EVALUATED AND LOOP WILL RUN
-            if (processed.containsKey(vertex))
-                continue;
+            if (processed.containsKey(vertex)) continue;
 
             // If graph is continuous then loop will run only once(flag = 1)
             // otherwise flag >=2
@@ -584,11 +577,13 @@ public class Graph {
     }
 
     // Tree is an acyclic connected graph.
+    // O(Vertices + edges)
     public boolean isTree() {
         return !this.isCyclic() && this.isContinuous();
     }
 
     // returns ArrayList of ArrayLists of connected vertices
+    // O(Vertices + edges)
     public ArrayList<ArrayList<String>> getConnectedComponents() {
         // Level-order implementation
         LinkedList<Pair> queue = new LinkedList<>();
@@ -605,8 +600,7 @@ public class Graph {
         for (String vertex : vertices) {
 
             // If there is discontinuity in graph
-            if (processed.containsKey(vertex))
-                continue;
+            if (processed.containsKey(vertex)) continue;
 
             // For a group of connected components
             ArrayList<String> subList = new ArrayList<>();
@@ -676,6 +670,9 @@ public class Graph {
         }
     }
 
+    // (V * log V) + (V * log V) + (2E * log V)
+    // 2(V+E) * log V
+    // O((E +V) * log V)
     public Graph primsAlgo() {
         Graph MST = new Graph();
 
@@ -683,6 +680,7 @@ public class Graph {
         GenericHeap<PrimsPair> heap = new GenericHeap<>();
 
         // Add pairs to heap and map both
+        // O(V)
         for (String key : this.vertices.keySet()) {
             PrimsPair pair = new PrimsPair();
             pair.vertex = key;
@@ -693,10 +691,11 @@ public class Graph {
             map.put(key, pair);
         }
 
+        // O(V * log V)
         while (!heap.isEmpty()) {
             // remove a pair
             PrimsPair removedPair = heap.remove();
-            map.remove(removedPair.vertex);
+            map.remove(removedPair.vertex); // O(log V)
 
             // Initial case
             if (removedPair.acqVertex == null) {
@@ -709,6 +708,7 @@ public class Graph {
             }
 
             // Work on neighbors
+            //O( 2E * log V)
             for (String neighbor : this.vertices.get(removedPair.vertex).neighbors.keySet()) {
                 // only if already not added to MST
                 if (map.containsKey(neighbor)) {
@@ -723,7 +723,7 @@ public class Graph {
                         // We need to upHeapify the heap after updating index
                         // which will require index of the neighborPair in heap
                         // we will track index through the heap class itself
-                        heap.updatePriority(neighborPair);
+                        heap.updatePriority(neighborPair); // O(log V)
                     }
                 }
             }
@@ -743,7 +743,7 @@ public class Graph {
         }
     }
 
-    // O(V + E logV)
+    // O((E +V) * log V)
     public HashMap<String, Integer> dijkstraAlgo(String source) {
 
         HashMap<String, Integer> ans = new HashMap<>();
@@ -795,6 +795,146 @@ public class Graph {
             }
         }
         return ans;
+    }
+
+    // Sets implementation for Kruskal's Algorithm
+    public static class DisJointSet {
+
+        // To store addresses of nodes corresponding to vertex name
+        HashMap<String, Node> map = new HashMap<>();
+
+        private static class Node {
+            String data;
+            Node parent;
+            int rank;
+        }
+
+        // O(1)
+        public void create(String value) {
+            Node newNode = new Node();
+            newNode.data = value;
+            newNode.parent = newNode;
+            newNode.rank = 0;
+
+            map.put(newNode.data, newNode);
+        }
+
+        // O(1)
+        public void union(String value1, String value2) {
+            // Nodes corresponding to vertices' names
+            Node node1 = map.get(value1);
+            Node node2 = map.get(value2);
+
+            // Nodes of representative vertices
+            Node rep1 = find(node1);
+            Node rep2 = find(node2);
+
+            // Both have same representatives
+            // Belong to same set
+            if (Objects.equals(rep1.data, rep2.data)) {
+                return;
+            }
+            // belong to different sets
+            else {
+                // same rank
+                // make anyone parent(your choice)
+                if (rep1.rank == rep2.rank) {
+                    rep2.parent = rep1;
+                    rep1.rank += 1;
+                }
+                // make higher rank parent
+                else if (rep1.rank > rep2.rank) {
+                    rep2.parent = rep1;
+                } else {
+                    rep1.parent = rep2;
+                }
+            }
+        }
+
+        // returns representative of set containing value(root node)
+        // O(1) -- Average
+        public String find(String value) {
+            // find(map.get(value)) => returns address of root node
+            return find(map.get(value)).data;
+        }
+
+        // returns address of top most parent(representative) of given node(root node)
+        private Node find(Node node) {
+            if (node == node.parent) {
+                return node;
+            }
+
+            Node rep = find(node.parent);
+            node.parent = rep;  // PATH COMPRESSION -- O(1)
+            return rep;
+        }
+    }
+
+    private static class EdgePair implements Comparable<EdgePair> {
+        String vertex1;
+        String vertex2;
+        int cost;
+
+        @Override
+        // Ascending Order(small cost less priority)
+        public int compareTo(EdgePair o) {
+            return this.cost - o.cost;
+        }
+
+        @Override
+        public String toString() {
+            return vertex1 + "-" + vertex2 + " : " + cost;
+        }
+    }
+
+    // returns a list of edges in form of EdgePair
+    public ArrayList<EdgePair> getAllEdges() {
+        ArrayList<EdgePair> edges = new ArrayList<>();
+
+        for (String vertexName : vertices.keySet()) {
+            Vertex vertex = vertices.get(vertexName);
+
+            for (String neighbor : vertex.neighbors.keySet()) {
+                EdgePair pair = new EdgePair();
+                pair.vertex1 = vertexName;
+                pair.vertex2 = neighbor;
+                pair.cost = vertex.neighbors.get(neighbor);
+
+                edges.add(pair);
+            }
+        }
+        return edges;
+    }
+
+    // (E * log E) + V + E
+    // O(E * log E)
+    // O(E * log V)   -- As E = V^2 in worst case
+    public void kruskalAlgo() {
+        ArrayList<EdgePair> edges = getAllEdges(); // get all edges
+        Collections.sort(edges); // sort based on cost -- O(E * log E)
+
+        DisJointSet set = new DisJointSet();
+
+        // 1 - Create sets for each vertex
+        for (String vertexName : vertices.keySet()) {
+            set.create(vertexName);  // O(V)
+        }
+
+        // O(E)
+        for (EdgePair edge : edges) {
+
+            // Representatives of both ends of a particular edge
+            String rep1 = set.find(edge.vertex1);
+            String rep2 = set.find(edge.vertex2);
+
+            if (rep1.equals(rep2)) {
+                // same set => ignore
+                continue;
+            } else {
+                System.out.println(edge);
+                set.union(edge.vertex1, edge.vertex2);
+            }
+        }
     }
 }
 
@@ -895,5 +1035,9 @@ class test {
         System.out.println();
         System.out.println("Minimum distance of vertices from source using Dijkstra's Algorithm:");
         System.out.println(graph.dijkstraAlgo("A"));
+
+        System.out.println();
+        System.out.println("Kruskal's Algorithm to find an MST:");
+        graph.kruskalAlgo();
     }
 }
