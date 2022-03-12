@@ -888,6 +888,7 @@ public class Graph {
     }
 
     // returns a list of edges in form of EdgePair
+    // O(E)
     public ArrayList<EdgePair> getAllEdges() {
         ArrayList<EdgePair> edges = new ArrayList<>();
 
@@ -936,10 +937,52 @@ public class Graph {
             }
         }
     }
+
+    // O(V*E)
+    public HashMap<String, Integer> bellmanFordsAlgo(String source) throws Exception {
+        // list of all edges
+        // O(E)
+        ArrayList<EdgePair> edges = getAllEdges();
+
+        // map to store minimum distances
+        HashMap<String, Integer> map = new HashMap<>();
+
+        // input to map
+        // O(V)
+        for (String key : vertices.keySet()) {
+            // initialize with infinity
+            map.put(key, Integer.MAX_VALUE);
+
+            // distance od]f source = 0
+            if (Objects.equals(key, source))
+                map.put(key, 0);
+        }
+
+        int V = vertices.size();
+
+        // Relax V-1 times
+        // O(V*E)
+        for (int i = 1; i < V; i++) {
+            for (EdgePair edge : edges) {
+
+                int oldCost = map.get(edge.vertex2);
+                int newCost = map.get(edge.vertex1) + edge.cost;
+
+                // relax
+                if (newCost < oldCost) {
+                    if (i<=V-1)
+                        map.put(edge.vertex2, newCost);
+                    else
+                        throw new Exception("Negative wighted cycle present");
+                }
+            }
+        }
+        return map;
+    }
 }
 
 class test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Graph graph = new Graph();
         graph.addVertex("A");
         graph.addVertex("B");
@@ -1039,5 +1082,10 @@ class test {
         System.out.println();
         System.out.println("Kruskal's Algorithm to find an MST:");
         graph.kruskalAlgo();
+
+        System.out.println();
+        System.out.println("Minimum distance of vertices from source using Bellman Ford's Algorithm:");
+        System.out.println(graph.bellmanFordsAlgo("A"));
+
     }
 }
