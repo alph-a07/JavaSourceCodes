@@ -106,7 +106,6 @@ public class SegmentTree {
         this.root.data = update(root, index, data);
     }
 
-    // O(log N)
     private int update(Node node, int index, int data) {
 
         // if index lies b/w node's interval
