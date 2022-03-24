@@ -6,7 +6,7 @@ public class divide_and_conquer_max_sum_subarray {
         System.out.println(maxsum_subarray(array, 0, array.length - 1));
     }
 
-    //Checks for maximum subarray which contains mid element also
+    // Checks for maximum subarray which contains mid element also
     public static int midcrossmax_sum_subarray(int[] array, int mid, int low, int high) {
         int sum = 0;
         int left_sum = Integer.MIN_VALUE;
@@ -28,7 +28,7 @@ public class divide_and_conquer_max_sum_subarray {
         return Math.max(Math.max(left_sum, right_sum), left_sum + right_sum);
     }
 
-    //checks for maximum between right and left subarray ans the subarray containing mid element
+    // checks for maximum between right and left subarray ans the subarray containing mid element
     public static int maxsum_subarray(int[] array, int low, int high) {
         if (low == high)
             return array[low];
