@@ -170,14 +170,15 @@ public class BinaryTree {
                 stack.push(node);
                 node = node.left;
             }
+
             // if the current node is null i.e. reached end
             else {
-                // if reached end stack is also empty then all elements are printed
+                // if reached end stack is also empty then all elements are added
                 // break the loop
                 if (stack.isEmpty())
                     break;
 
-                // go to stack and print the element as it will be last left element
+                // go to stack and add the element as it will be last left element
                 node = stack.pop();
                 list.add(node.data);
                 // go to right node

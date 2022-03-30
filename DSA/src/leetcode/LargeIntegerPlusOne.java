@@ -3,34 +3,37 @@ package leetcode;
 public class LargeIntegerPlusOne {
     public int[] plusOne(int[] digits) {
         int counter = 0;
+        // check for all 9
         for (int i : digits) {
             if (i == 9)
                 counter++;
         }
 
+        int[] arr; // answer array
+
+        // all digits are 9
         if (counter == digits.length) {
-            int[] arr = new int[digits.length + 1];
-            arr[0] = 1;
+            arr = new int[digits.length + 1]; // length += 1
+            arr[0] = 1; // 9 + 1 = 10 ; 99 + 1 = 100
 
-            return arr;
-        } else {
-            long num = 0;
-            for (int i = 0; i < digits.length; i++) {
-                num += digits[i] * Math.pow(10, digits.length - i - 1);
-            }
-            num = num + 1;
-
-            int[] arr;
-            arr = new int[digits.length];
-
-            int j = arr.length - 1;
-            while (j >= 0) {
-                int digit = (int) (num % 10);
-                arr[j] = digit;
-                num = num / 10;
-                j--;
-            }
-            return arr;
         }
+        // not all digits are 9
+        else {
+            arr = digits;
+            // last digit is not 9 -- no carry at all
+            if (digits[digits.length - 1] != 9) {
+                arr[digits.length - 1] += 1;
+            }
+            // some digits from right are 9 (consequent)
+            else {
+                arr[digits.length - 1] = 0; // 9 + 1 = 10
+                int i;
+                for (i = arr.length - 2; i >= 0 && arr[i] == 9; i--) {
+                    arr[i] = 0; // answer digit = 0 for consequent 9s
+                }
+                arr[i] += 1; // add 1 carry to the first non-9 character
+            }
+        }
+        return arr;
     }
 }

@@ -56,7 +56,7 @@ public class MergeTwoSortedLinkedLists {
             temp3 = nn; // move temp3 forward
         }
 
-        // attach if any node left
+        // attach if any nodes left
         if (temp1 != null) {
             temp3.next = temp1;
         }
