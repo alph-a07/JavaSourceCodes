@@ -1,13 +1,12 @@
 package queues;
 
 public class CircularQueue {
+    public static int DEFAULT_CAPACITY = 5;
     int[] array;
     int front;
     int rear;
     int currentSize;
     int maxSize;
-
-    public static int DEFAULT_CAPACITY = 5;
 
     CircularQueue() {
         this(DEFAULT_CAPACITY);
@@ -48,7 +47,7 @@ public class CircularQueue {
 
     // O(1)
     public int dequeue() {
-        int temp=this.array[this.front];
+        int temp = this.array[this.front];
         if (!this.isEmpty()) {
             this.front = (this.front + 1) % this.array.length;
             this.currentSize--;
@@ -58,8 +57,7 @@ public class CircularQueue {
 
     // O(1)
     public int getFront() throws Exception {
-        if (this.isEmpty())
-            throw new Exception("Empty Queue");
+        if (this.isEmpty()) throw new Exception("Empty Queue");
         return this.array[this.front];
     }
 

@@ -11,31 +11,31 @@ public class backtracking_blockedMaze {
     }
 
     public static void blockedmaze(int[][] maze, int row, int column, String ans, boolean[][] visited) {
-        //positive base case
+        // positive base case
         if (row == maze.length - 1 && column == maze.length) {
             System.out.println(ans);
             return;
         }
 
-        //negative base case
-        if (row < 0 || row >= maze.length ||                                  //out of boundary
-                column < 0 || column >= maze[row].length ||                 //out of boundary
-                visited[row][column] ||                                     //already visited
-                maze[row][column] == 1) {                                   //blocked
+        // negative base case
+        if (row < 0 || row >= maze.length ||                                  // out of boundary
+                column < 0 || column >= maze[row].length ||                 // out of boundary
+                visited[row][column] ||                                     // already visited
+                maze[row][column] == 1) {                                   // blocked
             return;
         }
 
         visited[row][column] = true;
 
-        //Top
+        // Top
         blockedmaze(maze, row - 1, column, ans + "T", visited);
-        //Down
+        // Down
         blockedmaze(maze, row + 1, column, ans + "D", visited);
-        //Left
+        // Left
         blockedmaze(maze, row, column - 1, ans + "L", visited);
-        //Right
+        // Right
         blockedmaze(maze, row, column + 1, ans + "R", visited);
 
-        visited[row][column] = false;                         //backtracking
+        visited[row][column] = false;                         // backtracking
     }
 }

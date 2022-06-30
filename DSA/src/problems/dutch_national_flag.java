@@ -22,6 +22,7 @@ public class dutch_national_flag {
                 //when the element is 2 after that when swapping is done
                 //no need to increase i as high is decreased and while loop will be iterating over high
             } else {
+                swap(array, high, i);
                 high--;
             }
         }

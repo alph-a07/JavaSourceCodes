@@ -1,6 +1,6 @@
 package problems;
 
-import java.util.*;
+import java.util.Arrays;
 
 public class lower_upper_bounds {
     public static void main(String[] args) {

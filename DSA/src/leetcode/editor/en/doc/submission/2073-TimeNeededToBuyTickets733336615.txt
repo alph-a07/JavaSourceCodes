@@ -1,0 +1,30 @@
+class Solution {
+    public int timeRequiredToBuy(int[] tickets, int k) {
+        Queue<Integer> queue = new LinkedList<>();
+        int time = 0;
+
+        for (int ticket : tickets)
+            queue.add(ticket);
+
+        while (tickets[k] != 0) {
+            int temp = queue.remove();
+
+            if (temp != 0)
+                queue.add(temp - 1);
+
+            for (int i =0;i<tickets.length;i++){
+                if (tickets[i]>0){
+                    tickets[i]-=1;
+                    time++;
+                }
+            }
+        }
+        return time;
+    }
+}
+
+//total_testcases:65
+//total_correct:9
+//input_formatted:"[84,49,5,24,70,77,87,8],3"
+//expected_output:154
+//code_output:157

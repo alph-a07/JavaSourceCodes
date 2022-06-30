@@ -1,7 +1,5 @@
 package stacks;
 
-import stacks.Stack;
-
 public class reverseStack extends Stack {
     public static void main(String[] args) {
         Stack stack = new Stack(5);

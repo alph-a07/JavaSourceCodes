@@ -3,14 +3,12 @@ package graphs;
 import heaps.GenericHeap;
 
 import java.util.*;
-
 public class Graph {
 
     // Hashmap of vertices
     // Key = Name of current vertex
     // Value = Address of Vertex class containing neighbors of current vertex
     HashMap<String, Vertex> vertices;
-
     private static class Vertex {
         // Hashmap of neighbors
         // Key = neighbor vertex name
@@ -38,7 +36,6 @@ public class Graph {
         // A distinct vertex initially
         vertices.put(vertexName, vertex);
     }
-
     public void removeVertex(String vertexName) {
         // Reference to given vertex name
         Vertex vertex = this.vertices.get(vertexName);

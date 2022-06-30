@@ -1,0 +1,35 @@
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head.next == null)
+            return head;
+
+        ListNode p1 = head;
+        ListNode p2 = p1.next;
+        ListNode p3 = p2.next;
+
+        p1.next = p3;
+        p2.next = p1;
+
+        if (head.next != null)
+            head.next = swapPairs(p3);
+
+        return p2;
+    }
+}
+
+//runtime_error:java.lang.NullPointerException: Cannot read field "next" because "<parameter1>" is null
+  at line 14, Solution.swapPairs
+  at line 54, __DriverSolution__.__helper__
+  at line 84, __Driver__.main
+//last_testcase:[]
