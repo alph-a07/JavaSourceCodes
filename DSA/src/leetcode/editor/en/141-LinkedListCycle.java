@@ -13,7 +13,7 @@ package leetcode.editor.en;// 2022-06-23 17:30:52
  * }
  * }
  */
-public class Solution {
+public class Solution141 {
     // 💡: Slow will iterate through each node while fast will go next and next
     // 💡: At some point if cycle is present slow and fast will collide at its starting point
     public boolean hasCycle(ListNode head) {

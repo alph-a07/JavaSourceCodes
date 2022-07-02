@@ -12,7 +12,7 @@ package leetcode.editor.en;// 2022-06-24 15:35:34
  * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class Solution24 {
     public ListNode swapPairs(ListNode head) {
 
         // BASE CASE

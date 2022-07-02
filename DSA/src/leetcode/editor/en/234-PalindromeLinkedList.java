@@ -21,7 +21,7 @@ import java.util.Stack;
     }
 }*/
 
-class Solution {
+class Solution234 {
     public boolean isPalindrome(ListNode head) {
         // calculating size of linked-list
         int size = 1;
