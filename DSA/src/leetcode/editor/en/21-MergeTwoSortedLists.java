@@ -12,7 +12,7 @@ package leetcode.editor.en;// 2022-05-09 01:19:58
  * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class MergeTwoSortedLinkedLists {
+class Solution21 {
     // NOT IN-PLACE
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode ans = new ListNode(); // answer list
@@ -61,7 +61,7 @@ class MergeTwoSortedLinkedLists {
         return ans;
     }
 
-    public class ListNode {
+    /*public class ListNode {
         int val;
         ListNode next;
 
@@ -76,6 +76,6 @@ class MergeTwoSortedLinkedLists {
             this.val = val;
             this.next = next;
         }
-    }
+    }*/
 }
 //leetcode submit region end(Prohibit modification and deletion)
