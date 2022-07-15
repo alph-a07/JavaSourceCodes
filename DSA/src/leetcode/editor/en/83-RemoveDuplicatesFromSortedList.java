@@ -12,8 +12,7 @@ package leetcode.editor.en;// 2022-05-09 01:28:32
  * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class RemoveDuplicatesFromSortedList {
-
+class Solution83 {
     // O(n^2)
     public ListNode deleteDuplicates(ListNode head) {
         ListNode temp = head; // pointer to head
@@ -51,22 +50,22 @@ class RemoveDuplicatesFromSortedList {
         }
         return head;
     }
+}
 
-    public class ListNode {
-        int val;
-        ListNode next;
+class ListNode {
+    int val;
+    ListNode next;
 
-        ListNode() {
-        }
+    ListNode() {
+    }
 
-        ListNode(int val) {
-            this.val = val;
-        }
+    ListNode(int val) {
+        this.val = val;
+    }
 
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
