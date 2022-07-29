@@ -15,7 +15,7 @@ import java.util.HashMap;
  * }
  * }
  */
-public class Solution142 {
+class Solution142 {
     public ListNode detectCycle(ListNode head) {
         HashMap<ListNode, Boolean> map = new HashMap<ListNode, Boolean>();
 

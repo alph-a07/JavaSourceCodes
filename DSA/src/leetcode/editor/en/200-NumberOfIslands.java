@@ -1,9 +1,9 @@
-package leetcode.editor.en;// 2022-06-08 15:01:26
+// 2022-07-29 19:11:39
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int singleNumber(int[] nums) {
-
+    public int numIslands(char[][] grid) {
+        
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

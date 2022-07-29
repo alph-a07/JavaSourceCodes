@@ -1,46 +1,63 @@
 package leetcode.editor.en;// 2022-07-02 23:50:14
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution15 {
+    List<List<Integer>> res = new ArrayList<>();
+
     public List<List<Integer>> threeSum(int[] nums) {
-        int low = 0;
-        int high = nums.length - 1;
 
-        HashMap<Integer, Integer> map = new HashMap<>();
-        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums); // sort
 
-        while ((nums.length % 2 == 0 && high - low >= 3) || (nums.length % 2 == 1 && high - low >= 2)) {
-            int leftSum = 0;
-            for (int i = low; i < low + 3; i++) {
-                leftSum += nums[i];
+        for (int i = 0; i < nums.length - 2; i++) {
+            // a = nums[i] (only unique a)
+            if (i == 0 || nums[i] != nums[i - 1]) {
+                twoSumSorted(i + 1, nums.length - 1, nums, -nums[i]);
             }
-            if (leftSum == 0) {
-                List<Integer> leftTemp = new ArrayList<>();
-                for (int i = low; i < low + 3; i++) {
-                    leftTemp.add(nums[i]);
-                }
-                ans.add(leftTemp);
-            }
-            low++;
-
-            int rightSum = 0;
-            for (int i = high; i > high - 3; i--) {
-                rightSum += nums[i];
-            }
-            if (rightSum == 0) {
-                List<Integer> rightTemp = new ArrayList<>();
-                for (int i = high; i > high - 3; i--) {
-                    rightTemp.add(nums[i]);
-                }
-                ans.add(rightTemp);
-            }
-            high--;
         }
-        return ans;
+        return res;
+    }
+
+    private void twoSumSorted(int start, int end, int[] nums, int target) {
+        int a = nums[start - 1];
+
+        // b + c = -a = target
+        while (start < end) {
+            int b = nums[start];
+            int c = nums[end];
+
+            // target exceeds - add larger number
+            if (b + c < target) {
+                start++;
+            }
+            // target lags - add smaller number
+            else if (b + c > target) {
+                end--;
+            }
+            // hit
+            else {
+                List<Integer> temp = new ArrayList<>();
+                temp.add(a);
+                temp.add(b);
+                temp.add(c);
+
+                res.add(temp);
+
+                // skip duplicate b for current a
+                while (start < end && nums[start] == nums[start + 1])
+                    start++;
+
+                // skip duplicate c for current a
+                while (start < end && nums[end] == nums[end - 1])
+                    end--;
+
+                start++;
+                end--;
+            }
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -3,7 +3,7 @@ package leetcode.editor.en;// 2022-07-02 16:47:42
 import java.util.Stack;
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution84 {
 
     // Time complexity: O(n)
     public int largestRectangleArea(int[] heights) {

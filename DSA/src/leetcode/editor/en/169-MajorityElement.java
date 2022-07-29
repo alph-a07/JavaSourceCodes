@@ -1,8 +1,8 @@
-package leetcode.editor.en;// 2022-06-08 15:01:26
+package leetcode.editor.en;// 2022-07-30 02:49:02
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int singleNumber(int[] nums) {
+    public int majorityElement(int[] nums) {
 
     }
 }

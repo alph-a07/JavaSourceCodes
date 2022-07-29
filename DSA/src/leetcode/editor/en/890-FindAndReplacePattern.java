@@ -1,9 +1,9 @@
-package leetcode.editor.en;// 2022-06-08 15:01:26
+// 2022-07-30 01:14:23
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int singleNumber(int[] nums) {
-
+    public List<String> findAndReplacePattern(String[] words, String pattern) {
+        
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

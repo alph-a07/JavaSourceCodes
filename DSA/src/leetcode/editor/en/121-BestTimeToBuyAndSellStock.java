@@ -7,9 +7,9 @@ class Solution121 {
         int tempProfit = 0;
         int profit = 0;
 
-        for (int i = 0; i < prices.length; i++) {
-            leastBuy = Math.min(prices[i], leastBuy); // updating cheaper buy
-            tempProfit = prices[i] - leastBuy; // if sold today
+        for (int price : prices) {
+            leastBuy = Math.min(price, leastBuy); // updating cheaper buy
+            tempProfit = price - leastBuy; // if sold today
             profit = Math.max(tempProfit, profit); // maximising profit
         }
         return profit;

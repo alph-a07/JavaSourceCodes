@@ -1,33 +1,20 @@
 package leetcode.editor.en;// 2022-05-09 01:22:28
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class RemoveDuplicatesFromSortedArrays {
+class Solution26 {
     // IN-PLACE
     public int removeDuplicates(int[] nums) {
-        int k = 1; // Effective number of elements in answer array
+        int i = 0;
+        int j = 0;
 
-        // loop on whole array
-        for (int i = 0; i < nums.length - 1; i++) {
-            // loop on next elements of current element
-            for (int j = i + 1; j < nums.length; j++) {
-                // If any number less than current element is found, put it next to current element
-                if (nums[i] != nums[j] && nums[i] < nums[j]) {
-                    nums[i + 1] = nums[j];
-                    break;
-                }
+        while (j < nums.length) {
+            if (nums[i] != nums[j]) {
+                nums[i + 1] = nums[j];
+                i++;
             }
+            j++;
         }
-        // Duplicated elements will be gathered at the end of array
-
-        for (int i = 0; i < nums.length - 1; i++) {
-            // loop will break when max element will be reached
-            if (nums[i] < nums[i + 1])
-                k++;
-            else
-                break;
-        }
-
-        return k;
+        return i + 1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
