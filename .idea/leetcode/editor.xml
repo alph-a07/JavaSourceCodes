@@ -1147,6 +1147,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/5-LongestPalindromicSubstring.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/doc/content/5-LongestPalindromicSubstring.md" />
+              <option name="frontendQuestionId" value="leetcode.com5" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/5-LongestPalindromicSubstring.java" />
+              <option name="titleSlug" value="longest-palindromic-substring" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/509-FibonacciNumber.java">
           <value>
             <LeetcodeEditor>
@@ -1246,6 +1257,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/6-ZigzagConversion.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/doc/content/6-ZigzagConversion.md" />
+              <option name="frontendQuestionId" value="leetcode.com6" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/6-ZigzagConversion.java" />
+              <option name="titleSlug" value="zigzag-conversion" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/61-RotateList.java">
           <value>
             <LeetcodeEditor>
@@ -1298,6 +1320,17 @@
               <option name="host" value="leetcode.com" />
               <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/69-Sqrtx.java" />
               <option name="titleSlug" value="sqrtx" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/7-ReverseInteger.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/doc/content/7-ReverseInteger.md" />
+              <option name="frontendQuestionId" value="leetcode.com7" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/7-ReverseInteger.java" />
+              <option name="titleSlug" value="reverse-integer" />
             </LeetcodeEditor>
           </value>
         </entry>
