@@ -1,0 +1,32 @@
+class Solution {
+    public int maxProfit(int k, int[] prices) {
+        if (prices.length < 2 || k == 0)
+            return 0;
+
+        int[][] storage = new int[k + 1][prices.length];
+
+        for (int trxn = 1; trxn <= k; trxn++) {
+            int min_buy = Integer.MAX_VALUE;
+            int min_buy_day = 0;
+            for (int day = 1; day < prices.length; day++) {
+                int prev_profit = storage[trxn][day - 1];
+
+                if (prices[day - 1] < min_buy) {
+                    min_buy = prices[day - 1];
+                    min_buy_day = day - 1;
+                }
+
+                int profit_today = prices[day] - min_buy;
+
+                storage[trxn][day] = Math.max(prev_profit, profit_today + storage[trxn - 1][min_buy_day]);
+            }
+        }
+        return storage[k][prices.length - 1];
+    }
+}
+
+//total_testcases:211
+//total_correct:148
+//input_formatted:"2,[6,1,3,2,4,7]"
+//expected_output:7
+//code_output:6

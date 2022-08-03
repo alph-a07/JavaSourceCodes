@@ -4,72 +4,78 @@ public class NthFibonacciNumber {
 
     // T.C = O(2^n)
     // S.C = recursion space
+    // stack overflow for very large values of n
     public static int recursive(int n) {
-
-        // n = 0 -> fn = 0
-        // n = 1 -> fn = 1
+        // base case
         if (n <= 1)
             return n;
 
-        return recursive(n - 1) + recursive(n - 2); // fn = f(n-1) + f(n-2)
+        return recursive(n - 1) + recursive(n - 2); // smaller problems
     }
 
     // T.C = O(n)   -- each number calculated once only
-    // S.C = O(n) + recursion space    -- extra space for array
-    // recursive approach
-    public static int topDown(int n, int[] array) {
+    // S.C = O(n) + recursion space
+    // recursive memorisation
+    public static int topDown(int n, int[] storage) {
 
-        // n = 0 -> fn = 0
-        // n = 1 -> fn = 1
-        if (n <= 1)
-            return n;
+        // base case
+        if (n <= 1) {
+            storage[n] = n; // store before return
+            return storage[n];
+        }
 
-        // Reuse stored values
-        if (array[n] != 0)
-            return array[n];
+        // check in storage before recursive call
+        int x = storage[n - 1] != 0 ? storage[n - 1] : topDown(n - 1, storage);
+        int y = storage[n - 2] != 0 ? storage[n - 2] : topDown(n - 2, storage);
 
-        int fn = topDown(n - 1, array) + topDown(n - 2, array); // fn = f(n-1) + f(n-2)
-        array[n] = fn; // store values before returning for further use
+        storage[n] = x + y; // store before return
 
-        return fn;
+        return storage[n];
     }
 
     // T.C = O(n)   -- each number calculated once only
     // S.C = O(n)    -- extra space for array (no recursion space)
-    // iterative approach
+    // iterative memorisation
     public static int bottomUp(int n) {
+        // edge case
+        if (n == 0)
+            return 0;
 
-        // array of size n+1
-        int[] array = new int[n + 1];
+        int[] storage = new int[n + 1]; // 0 -> n
 
-        // base case fill
-        array[0] = 0;
-        array[1] = 1;
+        // base case
+        storage[1] = 1;
 
-        // array filling
+        // storage filling
         for (int i = 2; i <= n; i++) {
-            array[i] = array[i - 1] + array[i - 2]; // call meaning
+            storage[i] = storage[i - 1] + storage[i - 2]; // call meaning
         }
 
-        return array[n];
+        return storage[n];
     }
 
     // T.C = O(n)   -- each number calculated once only
-    // S.C = O(1)   -- no extra space
-    // iterative approach
+    // S.C = O(1)
+    // iterative memorisation with constant space
     public static int bottomUpSpaceOptimized(int n) {
 
-        int[] array = new int[2]; // array of size 2
+        // edge case
+        if (n == 0)
+            return 0;
 
-        // base case fill
-        array[0] = 0;
-        array[1] = 1;
+        int[] storage = new int[2]; // 0 -> n
 
-        for (int slide = 1; slide <= n - 1; slide++) {
-            int sum = array[0] + array[1]; // get sum
-            array[0] = array[1]; // move to next slide
-            array[1] = sum; // sum at 2nd position
+        // starting window
+        storage[0] = 0;
+        storage[1] = 1;
+
+        // storage filling
+        for (int i = 2; i <= n; i++) {
+            int sum = storage[0] + storage[1]; // next number
+            storage[0] = storage[1]; // shift left
+            storage[1] = sum; // next number
         }
-        return array[1];
+
+        return storage[1];
     }
 }

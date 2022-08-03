@@ -1,7 +1,7 @@
 package leetcode.editor.en;// 2022-05-09 01:33:54
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class MissingNumber {
+class Solution268 {
     // Time complexity = O(N)
     // Space complexity = O(1)
     public int missingNumber(int[] nums) {

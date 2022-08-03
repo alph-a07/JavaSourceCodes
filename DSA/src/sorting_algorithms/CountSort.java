@@ -1,6 +1,6 @@
 package sorting_algorithms;
 
-public class count_sort {
+public class CountSort {
     public static int[] countSort(int[] arr) {
         int max = Integer.MIN_VALUE; // k
 

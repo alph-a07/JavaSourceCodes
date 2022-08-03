@@ -1,7 +1,6 @@
-package leetcode.editor.en;// 2022-06-08 15:01:26
+package bit_manipulation;
 
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution136 {
+public class SingleNumberInTwiceRepetition {
     static int singleNumber(int[] arr) {
         int res = 0;
 
@@ -10,5 +9,8 @@ class Solution136 {
         }
         return res;
     }
+
+    public static void main(String[] args) {
+        System.out.println(singleNumber(new int[]{1, 1, 2, 5, 4, 4, 5, 2, 3}));
+    }
 }
-//leetcode submit region end(Prohibit modification and deletion)

@@ -1,23 +1,26 @@
 package leetcode.editor.en;// 2022-07-30 03:07:59
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution509 {
     public int fib(int n) {
+        // edge case
         if (n == 0)
             return 0;
 
-        int[] array = new int[2]; // array of size 2
+        int[] storage = new int[2]; // 0 -> n
 
-        // base case fill
-        array[0] = 0;
-        array[1] = 1;
+        // starting window
+        storage[0] = 0;
+        storage[1] = 1;
 
-        for (int slide = 1; slide <= n - 1; slide++) {
-            int sum = array[0] + array[1]; // get sum
-            array[0] = array[1]; // move to next slide
-            array[1] = sum; // sum at 2nd position
+        // storage filling
+        for (int i = 2; i <= n; i++) {
+            int sum = storage[0] + storage[1]; // next number
+            storage[0] = storage[1]; // shift left
+            storage[1] = sum; // next number
         }
-        return array[1];
+
+        return storage[1];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
