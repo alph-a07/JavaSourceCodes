@@ -1,7 +1,7 @@
 // 2022-08-06 02:48:00
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution45 {
 
     public int jump(int[] nums) {
         int jumps = 0, curr_end = 0, max_reach = 0;
