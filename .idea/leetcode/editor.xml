@@ -773,6 +773,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/22-GenerateParentheses.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/doc/content/22-GenerateParentheses.md" />
+              <option name="frontendQuestionId" value="leetcode.com22" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/22-GenerateParentheses.java" />
+              <option name="titleSlug" value="generate-parentheses" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/2235-AddTwoIntegers.java">
           <value>
             <LeetcodeEditor>
@@ -1224,6 +1235,17 @@
             </LeetcodeEditor>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/45-JumpGameIi.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/doc/content/45-JumpGameIi.md" />
+              <option name="frontendQuestionId" value="leetcode.com45" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/45-JumpGameIi.java" />
+              <option name="titleSlug" value="jump-game-ii" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/49-GroupAnagrams.java">
           <value>
             <LeetcodeEditor>
@@ -1309,6 +1331,17 @@
               <option name="host" value="leetcode.com" />
               <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/543-DiameterOfBinaryTree.java" />
               <option name="titleSlug" value="diameter-of-binary-tree" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/DSA/src/leetcode/editor/en/55-JumpGame.java">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/doc/content/55-JumpGame.md" />
+              <option name="frontendQuestionId" value="leetcode.com55" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="$PROJECT_DIR$/DSA/src/leetcode/editor/en/55-JumpGame.java" />
+              <option name="titleSlug" value="jump-game" />
             </LeetcodeEditor>
           </value>
         </entry>
